@@ -1,0 +1,30 @@
+fly:
+    path:     /
+    defaults: { _controller: "FlyaroundFlyBundle:Fly:index" }
+
+fly_show:
+    path:     /{id}/show
+    defaults: { _controller: "FlyaroundFlyBundle:Fly:show" }
+
+fly_new:
+    path:     /new
+    defaults: { _controller: "FlyaroundFlyBundle:Fly:new" }
+
+fly_create:
+    path:     /create
+    defaults: { _controller: "FlyaroundFlyBundle:Fly:create" }
+    requirements: { _method: post }
+
+fly_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "FlyaroundFlyBundle:Fly:edit" }
+
+fly_update:
+    path:     /{id}/update
+    defaults: { _controller: "FlyaroundFlyBundle:Fly:update" }
+    requirements: { _method: post|put }
+
+fly_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "FlyaroundFlyBundle:Fly:delete" }
+    requirements: { _method: post|delete }

@@ -1,0 +1,8 @@
+flyaround_fly:
+    resource: "@FlyaroundFlyBundle/Resources/config/routing.yml"
+    prefix:   /
+
+homepage:
+    path:   /
+    defaults:  { _controller: FlyaroundFlyBundle:Default:index }
+    methods: GET

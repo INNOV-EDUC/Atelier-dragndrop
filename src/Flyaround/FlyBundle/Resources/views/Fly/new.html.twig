@@ -1,0 +1,73 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/flyaroundfly/css/style.css') }}"/>
+{% endblock %}
+
+{% block body -%}
+    <h1>Fly creation</h1>
+
+    {{ form(form) }}
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('fly') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+    <div id="map">
+        Veuillez patienter pendant le chargement de la carte...
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places&language=fr-FR"></script>
+    <script type="text/javascript">
+        var latlng = new google.maps.LatLng(46.7592690, 2.8603553);
+        // paris : 48.8575162	2.3426246
+        //objet contenant des propriétés avec des identificateurs prédéfinis dans Google Maps permettant
+        //de définir des options d'affichage de notre carte
+        var options = {
+            center: latlng,
+            zoom: 5,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        //constructeur de la carte qui prend en paramêtre le conteneur HTML
+        //dans lequel la carte doit s'afficher et les options
+        var map = new google.maps.Map(document.getElementById("map"), options);
+
+
+
+
+        //création du marqueur
+        marqueur = new google.maps.Marker({
+            position: new google.maps.LatLng(48.84815530, 2.38869420),
+            draggable:true,
+            map: map
+        });
+
+        google.maps.event.addListener(marqueur, 'dragend', function(event) {
+            map.setCenter(marqueur.getPosition());
+            setlatLngFromMap(marqueur.getPosition());
+        });
+
+        google.maps.event.addListener(map, 'dragend', function() {
+            marqueur.setPosition(map.getCenter());
+            setlatLngFromMap(map.getCenter());
+        });
+
+        google.maps.event.addListener(map, 'zoom_changed', function() {
+            marqueur.setPosition(map.getCenter());
+            setlatLngFromMap(map.getCenter());
+        });
+
+        function setlatLngFromMap(latlng) {
+            document.getElementById('flyaround_flybundle_fly_latitude').value = latlng.lat() ;
+            document.getElementById('flyaround_flybundle_fly_longitude').value = latlng.lng();
+            //console.log(results);
+        }
+
+    </script>
+{% endblock %}

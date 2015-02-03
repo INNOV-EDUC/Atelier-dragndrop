@@ -1,0 +1,4 @@
+services:
+#    flyaround_fly.example:
+#        class: Flyaround\FlyBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

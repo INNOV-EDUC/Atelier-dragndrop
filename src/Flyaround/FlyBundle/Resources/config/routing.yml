@@ -1,0 +1,7 @@
+flyaround_fly_fly:
+    resource: "@FlyaroundFlyBundle/Resources/config/routing/fly.yml"
+    prefix:   /fly
+
+flyaround_fly_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: FlyaroundFlyBundle:Default:index }
